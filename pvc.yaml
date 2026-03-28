@@ -5,7 +5,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: log-pvc
+  name: log-pvc-argocd
 spec:
   # must be the same as that of the PV. 
   storageClassName: local-storage

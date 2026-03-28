@@ -30,7 +30,7 @@ spec:
         # defines the volume named "log-volume" and associates it with the Persistent Volume Claim (PVC) log-pvc.
         - name: log-volume
           persistentVolumeClaim:
-            claimName: log-pvc
+            claimName: log-pvc-argocd
       containers:
       - name: app-python-app
         # name of the image that we re using to create the container. after building the image with docker, the image has to be uploaded to minikube
