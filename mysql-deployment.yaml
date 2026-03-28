@@ -13,7 +13,7 @@
 
 
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mysql-deployment
   # in k8 u can label any component. aditional identifiers as a plus to name which should be meaningful
