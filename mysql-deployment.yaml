@@ -22,7 +22,7 @@ metadata:
 
 spec:
   # replicas: how many pods u want to create
-  replicas: 1
+  replicas: 3
   # The selector section defines the workloads the deployment manages.
   selector:
     # matchlabels: list the labels for all the pods managed by the deployment; used to identify the pods as belonging to the same deployment. so all the pods with this matchlabel belong to this deployment.
