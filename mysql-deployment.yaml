@@ -37,6 +37,8 @@ spec:
         app: mysql
     # The specification defines an image, a name, resources, ports, and other important information about the container.
     spec:
+      imagePullSecrets:
+        - name: ecr-pull-image-secret
       containers:
       # Any name u want for the container. A pod can have one or more containers. This is the definition of the container.
       - name: mysql
@@ -88,8 +90,7 @@ spec:
           #   secretKeyRef:
           #     name: database-secret
           #     key: mysql-password
-      imagePullSecrets:
-        - name: ecr-pull-image-secret
+
 
 # separation between configurations
 #---
