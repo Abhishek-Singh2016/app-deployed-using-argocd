@@ -40,6 +40,7 @@ spec:
       imagePullSecrets:
         - name: ecr-pull-image-secret
       containers:
+
       # Any name u want for the container. A pod can have one or more containers. This is the definition of the container.
       - name: mysql
         # which image will be used the create the container. mongo:5.0 taken from docker hub tags like for a dockerfile  
@@ -50,6 +51,22 @@ spec:
         # Any other value than Never does not work with minikube and local images. Never = the kubelet does not try fetching the image. If the image is somehow already present locally, the kubelet attempts to start the container; otherwise, startup fails. 
         # If you want to rely on pre-pulled images as a substitute for registry authentication, you must ensure all nodes in the cluster have the same pre-pulled images.
         imagePullPolicy: IfNotPresent
+        env:
+          # key value
+        # - name: MONGO_INITDB_ROOT_USERNAME
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: mongo-secret
+        #       key: mongo-user
+        - name: MYSQL_ROOT_PASSWORD
+          #value: abc123
+          #value: <your password>
+          valueFrom:
+            secretKeyRef:
+              name: database-secret
+              key: mysql-password
+        - name: MYSQL_DATABASE
+          value: mov
         volumeMounts:
         - name: db-storage         # This must match the name in volumeClaimTemplates
           mountPath: /var/lib/mysql  # This is the path where MySQL stores its data inside the container. By mounting the volume here, we ensure that the database data is stored persistently on the host machine, even if the container restarts or is recreated.
@@ -70,22 +87,6 @@ spec:
             # Naming ports allows you to change the exposed port without changing files that reference that port.
             # name: http
         # u get this info from the mongo db docker hub page. configure the env variables. when the container start, the root user with these credentials will be created
-        env:
-          # key value
-        # - name: MONGO_INITDB_ROOT_USERNAME
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: mongo-secret
-        #       key: mongo-user
-        - name: MYSQL_ROOT_PASSWORD
-          #value: abc123
-          #value: <your password>
-          valueFrom:
-            secretKeyRef:
-              name: database-secret
-              key: mysql-password
-        - name: MYSQL_DATABASE
-          value: mov
           # valueFrom:
           #   secretKeyRef:
           #     name: database-secret
