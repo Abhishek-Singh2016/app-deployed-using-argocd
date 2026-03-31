@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: engineering-team
+  namespace: argocd
+spec:
+  description: Project for the engineering team
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: prod-*
+    server: https://kubernetes.default.svc
